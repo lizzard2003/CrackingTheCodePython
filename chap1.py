@@ -107,3 +107,36 @@ input_str = "Mr John Smith    "
 true_length = 13
 result = replace_spaces_with_percent20(input_str, true_length)
 print(result)  # Should print "Mr%20John%20Smith"
+
+#1.4 Palindrome Permutation
+# palindrome is a word or phrase that is the same forward and backwards
+# we need to return true or false
+def is_permutation_of_palindrome(s):
+    # Convert the string to lowercase and remove non-letter characters
+    s = ''.join(filter(str.isalpha, s.lower()))
+
+    # Count the occurrences of each character
+    char_count = {}
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+
+    # Count the number of characters with odd occurrences
+    odd_count = 0
+    for count in char_count.values():
+        if count % 2 != 0:
+            odd_count += 1
+        if odd_count > 1:
+            return False
+    
+    return True
+
+# Example usage
+input_string = "whattootsie"
+result = is_permutation_of_palindrome(input_string)
+if result:
+    print("The string is a permutation of a palindrome.")
+else:
+    print("The string is not a permutation of a palindrome.")
