@@ -248,3 +248,45 @@ rotate_matrix(matrix)
 # The matrix will be rotated 90 degrees in place
 for row in matrix:
     print(row)
+
+#1.8 Zero Matrix
+#Write an algorithm such that if an element in a MxN matrix is 0, 
+# its entire row and column are set to 0.
+
+def set_zeros(matrix):
+    if not matrix:
+        return matrix  # Return the original matrix if it's empty
+
+    rows, cols = len(matrix), len(matrix[0])
+    zero_rows, zero_cols = set(), set()
+
+    # Identify rows and columns containing zeros
+    for i in range(rows):
+        for j in range(cols):
+            if matrix[i][j] == 0:
+                zero_rows.add(i)
+                zero_cols.add(j)
+
+    # Set rows to zero
+    for row in zero_rows:
+        for j in range(cols):
+            matrix[row][j] = 0
+
+    # Set columns to zero
+    for col in zero_cols:
+        for i in range(rows):
+            matrix[i][col] = 0
+
+# Example usage:
+matrix = [
+    [1, 2, 3],
+    [4, 0, 6],
+    [7, 8, 9]
+]
+
+set_zeros(matrix)
+
+# The matrix will have rows and columns with zeros set to zero
+for row in matrix:
+    print("----------")
+    print(row)
