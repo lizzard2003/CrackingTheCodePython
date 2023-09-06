@@ -183,4 +183,68 @@ print(result)  # Output should be True
 # compress the string and count the amount of letters in the string as it fgoes throug 
 # if the string and the counting is the sam lenght then return the original string 
 # you are trying to bring back a shorter version 
+def compress_string(s):
+    if not s:
+        return s  # Return the original string if it's empty
 
+    compressed = []
+    count = 1
+
+    for i in range(1, len(s)): # start at 1
+        if s[i] == s[i - 1]:
+            count += 1
+        else:
+            compressed.append(s[i - 1] + str(count))
+            count = 1
+
+    compressed.append(s[-1] + str(count))  # Add the last character and its count
+
+    compressed_str = ''.join(compressed)
+
+    # Return the compressed string only if it's shorter than the original
+    return compressed_str if len(compressed_str) < len(s) else s
+
+# Example usage:
+input_str = "aabcccccaaa"
+compressed_result = compress_string(input_str)
+print(compressed_result)  # Output should be "a2b1c5a3"
+
+#1.7 Rotate Matrix
+# Given an image represented by an NxN matrix, where each pixel in the image is represented 
+# by an interger, write a method
+# to rotate the image 90 degree, Can you do this in place? 
+def rotate_matrix(matrix):
+    if not matrix:
+        return matrix  # Return the original matrix if it's empty
+
+    n = len(matrix)
+
+    # Perform a series of swaps to rotate the matrix 90 degrees in place
+    for layer in range(n // 2):
+        first = layer
+        last = n - 1 - layer
+        for i in range(first, last):
+            offset = i - first
+            # Save the top element
+            top = matrix[first][i]
+            # Move left element to top
+            matrix[first][i] = matrix[last - offset][first]
+            # Move bottom element to left
+            matrix[last - offset][first] = matrix[last][last - offset]
+            # Move right element to bottom
+            matrix[last][last - offset] = matrix[i][last]
+            # Move top element to right
+            matrix[i][last] = top
+
+# Example usage:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+rotate_matrix(matrix)
+
+# The matrix will be rotated 90 degrees in place
+for row in matrix:
+    print(row)
