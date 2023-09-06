@@ -140,3 +140,47 @@ if result:
     print("The string is a permutation of a palindrome.")
 else:
     print("The string is not a permutation of a palindrome.")
+ 
+ #One way 
+ # ways to see of a string is edited
+ # this is changing only one character
+ # you are supposed to return true or false
+
+def is_one_edit_away(str1, str2):
+    # Calculate the length difference between the two strings
+    len1, len2 = len(str1), len(str2)
+    if abs(len1 - len2) > 1:
+        return False  # If the length difference is more than 1, it's not one edit away
+
+    # Ensure str1 is the shorter string
+    if len1 > len2:
+        str1, str2 = str2, str1
+
+    i, j = 0, 0  # Pointers for the two strings
+    found_difference = False  # Flag to track if a difference is found
+
+    while i < len(str1) and j < len(str2):
+        if str1[i] != str2[j]:
+            if found_difference:
+                return False  # If a second difference is found, it's not one edit away
+            found_difference = True  # Set the flag for the first difference
+
+            if len1 == len2:
+                i += 1  # If the lengths are the same, move the pointer in the shorter string
+        else:
+            i += 1  # If characters match, move both pointers
+        j += 1
+
+    return True
+
+# Example usage:
+str1 = "pale"
+str2 = "kaale"
+result = is_one_edit_away(str1, str2)
+print(result)  # Output should be True
+
+# 1.6 String Compression
+# compress the string and count the amount of letters in the string as it fgoes throug 
+# if the string and the counting is the sam lenght then return the original string 
+# you are trying to bring back a shorter version 
+
