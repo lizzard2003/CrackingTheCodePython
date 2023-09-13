@@ -290,3 +290,25 @@ set_zeros(matrix)
 for row in matrix:
     print("----------")
     print(row)
+
+# String Rotation
+# Assume you have a method isSubstring which checks 
+# if one word is a substring of another. Given 2 strings s1 and s2 write code to check if s2 us a roation of
+# s1 using only one call to isSubstring 
+def is_rotation(s1, s2):
+    if len(s1) != len(s2):
+        return False  # If lengths are different, s2 can't be a rotation of s1
+
+    s1s1 = s1 + s1
+    # Check if s2 is a substring of s1s1 using the isSubstring method
+    return isSubstring(s2, s1s1)
+
+# Assume you have an isSubstring method to check if one string is a substring of another
+def isSubstring(s, substring):
+    return s.find(substring) != -1
+
+# Example usage:
+s1 = "waterbottle"
+s2 = "erbottlewat"
+result = is_rotation(s1, s2)
+print(result)  # Output should be True
